@@ -20,7 +20,7 @@ Quick start
 
 5. inside /etc/hosts create an entry  127.0.0.1 celeryproject
 
-6. inside deploy folder there are the conf  sample  files , change paths according to your configuration
+6. inside deploy folder there are the conf  sample  files , create the conf files and change paths according to your configuration
 
 7. in  linux install supervisor and nginx::
     
