@@ -1,0 +1,15 @@
+[program:celeryproject_asgi_daphne]
+
+directory=/path/to/celeryproject/celeryproject
+
+command=/path/to/celeryproject/virtualenv/bin/daphne -u  /path/to/celeryproject/deploy/celeryproject_asgi.sock celeryproject.asgi:application
+
+stdout_logfile=/path/to/celeryproject/deploy/logs/daphne/daphne.log
+
+stderr_logfile=/path/to/celeryproject/deploy/logs/daphne/daphne_stderr.log
+
+autostart=true
+
+autorestart=true
+
+redirect_stderr=true

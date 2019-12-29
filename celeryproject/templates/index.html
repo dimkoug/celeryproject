@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<style>
+  #celery-result {
+    background-color: red;
+    height:20px;
+  }
+
+</style>
+
+<script>
+
+$(document).ready(function(){
+  // JQuery
+  var progressUrl = "{% url 'task_status' task_id %}";
+  var width = 0;
+  $('#celery-result').width(width);
+  function check_progress(){
+    $.ajax({
+      url: progressUrl,
+      method: 'get',
+      dataType: 'json',
+      success: function(data){
+        
+        if(data.state == 'PENDING'){
+            width = 0;
+        }
+        if(data.state == 'SUCCESS'){
+            width = 100;
+            $('#celery-result').html('the sum of the numbers : ' + data.details.counter);
+        }
+        if(data.state == 'PROGRESS'){
+            width = (data.details.current / data.details.total) * 100;
+            $('#celery-result').html('status:' + Math.round(width));
+            
+        }
+        $('#celery-result').width('' + width+ '%');
+      }
+    }).done(function(data) {
+          if(data.state == 'PROGRESS' || data.state == 'PENDING'){
+            setTimeout(check_progress, 1000);
+          }
+       
+    });
+  };
+  $('#start').click(function(){
+    setTimeout(check_progress, 1000);
+
+  })
+
+  
+})
+</script>
+
+<div id="progress-bar-message"><button id='start'>Get progress...</button></div>
+
+<div id="celery-result"></div>
+
+<a href="{% url 'chat' %}">Chat</a>
+{% endblock %}

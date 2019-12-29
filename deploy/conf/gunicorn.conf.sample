@@ -1,0 +1,7 @@
+[program:celeryproject]
+command=/path/to/celeryproject/virtualenv/bin/gunicorn  --workers 3 --bind unix:/path/to/celeryproject/deploy/celeryproject.sock celeryproject.wsgi
+directory=/path/to/celeryproject/celeryproject
+autostart=true
+autorestart=true
+stderr_logfile=/path/to/celeryproject/deploy/logs/gunicorn/celeryproject.err.log
+stdout_logfile=/path/to/celeryproject/deploy/logs/gunicorn/celeryproject.out.log

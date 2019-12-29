@@ -1,0 +1,27 @@
+server {
+    listen 81;
+    server_name celeryproject;
+    access_log /path/to/celeryproject/deploy/logs/nginx/nginx-access.log;
+    error_log /path/to/celeryproject/deploy/logs/nginx/nginx-error.log debug;
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static {
+        alias /path/to/celeryproject/public/static;
+    }
+    location /media {
+        alias /path/to/celeryproject/public/public/media;
+    }
+
+    location / {
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_pass http://unix:/path/to/celeryproject/deploy/celeryproject.sock;
+    }
+
+    location /ws/ {
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_pass http://unix:/path/to/celeryproject/deploy/celeryproject_asgi.sock;
+    }
+}
