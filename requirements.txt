@@ -62,7 +62,7 @@ service-identity==18.1.0
 six==1.13.0
 snowballstemmer==2.0.0
 sqlparse==0.3.0
-Twisted==20.3.0
+Twisted==22.10.0
 txaio==18.8.1
 ujson==1.35
 urllib3==1.26.5
