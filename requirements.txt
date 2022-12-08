@@ -10,7 +10,7 @@ autopep8==1.4.4
 billiard==3.6.1.0
 celery==4.4.0
 celery-progress==0.0.8
-certifi==2019.11.28
+certifi==2022.12.7
 cffi==1.13.2
 channels==2.4.0
 channels-redis==2.4.1
